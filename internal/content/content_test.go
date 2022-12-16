@@ -10,12 +10,19 @@ import (
 
 type ContentMock struct {
 	mock.Mock
+	content.ContentManager
 }
 
 func (m *ContentMock) Get()     {}
-func (m ContentMock) Put()      {}
 func (m *ContentMock) GetStar() {}
-func (m ContentMock) PutStar()  {}
+func (m *ContentMock) Put()     {}
+func (m *ContentMock) PutStar() {}
+
+// When not passed by pointer `go vet` will complain because mock.Mock uses a mutex lock
+// func (m ContentMock) Get()     {}
+// func (m ContentMock) GetStar() {}
+// func (m ContentMock) Put()     {}
+// func (m ContentMock) PutStar() {}
 
 type ContentSuite struct {
 	suite.Suite
